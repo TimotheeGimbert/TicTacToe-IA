@@ -226,21 +226,25 @@ class Morpion {
       return winner === player ? true : false;
     }
 
-    const winningPositions = {'x': null, 'y': null};
 
-    possibleHits.forEach( (cell) => {
-      const x = cell['x'];
-      const y = cell['y'];
-      if (isTestHitWinner(x, y, this.iaPlayer)) {
-        winningPositions['x'] = x;
-        winningPositions['y'] = y;
+    const findBest = (player) => {
+      const bestCell = {'x': null, 'y': null};
+      possibleHits.forEach( (cell) => {
+        const x = cell['x'];
+        const y = cell['y'];
+        if (isTestHitWinner(x, y, player)) {
+          bestCell['x'] = x;
+          bestCell['y'] = y;
+        }
+      });
+      if (bestCell['x'] !== null) {
+        const x = bestCell['x'];
+        const y = bestCell['y'];
+        return {x, y}
       }
-    });
-    if (winningPositions['x'] !== null) {
-      const x = winningPositions['x'];
-      const y = winningPositions['y'];
-      return {x, y}
     }
+    if (findBest(this.iaPlayer)) return findBest(this.iaPlayer);
+    else if (findBest(this.humanPlayer)) return findBest(this.humanPlayer);
     else return this.randomStrat(this.gridMap);
   }
 
