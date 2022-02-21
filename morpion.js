@@ -11,7 +11,7 @@ class Morpion {
 	];
 
   log = [];
-  difficulty = 'hard';
+  difficulty = 'medium';
 
 	constructor(firstPlayer = 'J1') {
 		this.humanPlayer = firstPlayer;
@@ -25,6 +25,9 @@ class Morpion {
       this.log = storedLog;
       storedLog.map((hit) => this.drawHit(hit['x'], hit['y'], hit['player']))
     }
+
+    const storedDifficulty = localStorage.getItem('difficulty');
+    if (storedDifficulty !== null) this.difficulty = storedDifficulty;
 
 		this.gridMap.forEach((line, y) => {
 			line.forEach((cell, x) => {
@@ -46,7 +49,7 @@ class Morpion {
       this.difficulty === 'hard' ? 'easy' : 
         this.difficulty === 'easy' ? 'medium' : 'hard';
     document.getElementById('difficulty').innerHTML = this.difficulty;
-    console.log(this.difficulty)
+    localStorage.setItem('difficulty', this.difficulty);
   }
 
   replay = () => {
