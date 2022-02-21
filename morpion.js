@@ -19,6 +19,12 @@ class Morpion {
 	}
 
 	initGame = () => {
+    const storedLog = JSON.parse(localStorage.getItem('game log'));
+    if (storedLog !== null) {
+      this.log = storedLog;
+      storedLog.map((hit) => this.drawHit(hit['x'], hit['y'], hit['player']))
+    }
+
 		this.gridMap.forEach((line, y) => {
 			line.forEach((cell, x) => {
 				this.getCell(x, y).onclick = () => {
@@ -31,12 +37,23 @@ class Morpion {
 			this.doPlayIa();
 		}
 
-    localStorage.removeItem('game log');
-
+    document.getElementById('replayBtn').addEventListener('click', () => this.replay());
     document.getElementById('undoBtn').addEventListener('click', () => this.undo());
     document.getElementById('redoBtn').addEventListener('click', () => this.redo());
     document.getElementById('logBtn').addEventListener('click', () => console.log(this.log, this.gridMap));
 	}
+
+  replay = () => {
+    localStorage.removeItem('game log');
+    this.gridMap = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ];
+    this.initGame();
+    
+    //this.saveLogInStorage();
+  }
 
 	getCell = (x, y) => {
 		const column = x + 1;
@@ -69,7 +86,7 @@ class Morpion {
     });
   }
 
-  saveInStorage = () => localStorage.setItem('game log', JSON.stringify(this.log));
+  saveLogInStorage = () => localStorage.setItem('game log', JSON.stringify(this.log));
 
   undoHit = () => {
     const lastHit = this.log.splice(-1)[0];
@@ -110,7 +127,7 @@ class Morpion {
 		}
 
 		if (this.drawHit(x, y, this.humanPlayer)) {
-      this.saveInStorage();
+      this.saveLogInStorage();
 			this.doPlayIa();
 		}
 	}
@@ -120,9 +137,9 @@ class Morpion {
 			return;
 		}
 
-        const { x, y } = this.minmax(this.gridMap, 0, -Infinity, Infinity, true);
-        this.drawHit(x, y, this.iaPlayer);
-        this.saveInStorage();
+    const { x, y } = this.minmax(this.gridMap, 0, -Infinity, Infinity, true);
+    this.drawHit(x, y, this.iaPlayer);
+    this.saveLogInStorage();
 	}
 
   getBoardWinner = (board) => {
@@ -170,16 +187,17 @@ class Morpion {
     }
   
     this.gameOver = true;
+    localStorage.removeItem('game log');
     switch(winner) {
-        case 'tie':
-      this.displayEndMessage("Vous êtes à égalité !");
-            break;
-        case this.iaPlayer:
-            this.displayEndMessage("L'IA a gagné !");
-            break;
-        case this.humanPlayer:
-            this.displayEndMessage("Tu as battu l'IA !");
-            break;
+      case 'tie':
+        this.displayEndMessage("Vous êtes à égalité !");
+        break;
+      case this.iaPlayer:
+        this.displayEndMessage("L'IA a gagné !");
+        break;
+      case this.humanPlayer:
+        this.displayEndMessage("Tu as battu l'IA !");
+        break;
     }
   }
 
