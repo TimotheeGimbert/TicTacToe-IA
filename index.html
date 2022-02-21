@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The Hacking Morpion</title>
+        <title>Tic-Tac-Toe</title>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
         <link rel="stylesheet" type="text/css" href="./style.css" />
     </head>
     <body>
-        <h1 class="title">The Hacking Morpion</h1>
+        <h1 class="title">Tic Tac Toe</h1>
         <section class="game-grid">
             <div class="cell" id="A1"></div>
             <div class="cell" id="A2"></div>
@@ -23,14 +23,13 @@
             <div class="cell" id="C3"></div>
         </section>
         <section class="actions">
-          <a id="undoBtn" class="step-button">Revenir en arrière</a>
-          <a id="replayBtn" class="replay-button" href="./index.html">Rejouer</a>
-          <a id="redoBtn" class="step-button">Aller en avant</a>
+          <a id="undoBtn" class="step-button"><img src="assets/arrow-left-long-solid.svg"></a>
+          <a id="replayBtn" class="replay-button" href="./index.html">Replay</a>
+          <a id="redoBtn" class="step-button"><img src="assets/arrow-right-long-solid.svg"></a>
         </section>
         <section class="actions">
           <a id="difficultyBtn" class="other-button">Change difficulty</a>
           <div id="difficulty"></div>
-          <!-- <a id="logBtn" class="other-button">Show LOG et gridMap in console</a> -->
         </section>
         <div class="end-message" id="end-message"></div>
         <script src="./morpion.js"></script>

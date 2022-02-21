@@ -40,14 +40,13 @@ class Morpion {
     document.getElementById('replayBtn').addEventListener('click', () => this.replay());
     document.getElementById('undoBtn').addEventListener('click', () => this.undo());
     document.getElementById('redoBtn').addEventListener('click', () => this.redo());
-    //document.getElementById('logBtn').addEventListener('click', () => console.log(this.log, this.gridMap));
     document.getElementById('difficultyBtn').addEventListener('click', () => this.changeDifficulty());
 	}
 
   changeDifficulty = () => {
-    this.difficulty = 
-      this.difficulty === 'hard' ? 'easy' : 
-        this.difficulty === 'easy' ? 'medium' : 'hard';
+    const difficulties = ['easy', 'medium', 'hard'];
+    const currentIndex = difficulties.findIndex( (e) => e === this.difficulty);
+    this.difficulty = difficulties[currentIndex + 1] === undefined ? difficulties[0] : difficulties[currentIndex + 1];
     document.getElementById('difficulty').innerHTML = this.difficulty;
     localStorage.setItem('difficulty', this.difficulty);
   }
@@ -74,12 +73,17 @@ class Morpion {
     this.turn += 1;
 		this.getCell(x, y).classList.add(`filled-${player}`);
     this.saveInLog(x, y , player);
-		this.checkWinner(player);
+		this.checkWinner();
 		return true;
 	}
 
-  saveInLog = (x, y , player) => this.log.push( { player: player, x: x, y: y  } );
-  saveLogInStorage = () => localStorage.setItem('game log', JSON.stringify(this.log));
+  saveInLog = (x, y , player) => {
+    this.log.push( { player: player, x: x, y: y  } );
+  }
+
+  saveLogInStorage = () => {
+    localStorage.setItem('game log', JSON.stringify(this.log));
+  }
 
   undo = () => {
     const undoHit = () => {
@@ -112,9 +116,7 @@ class Morpion {
   }
 
 	doPlayHuman = (x, y) => {
-		if (this.gameOver) {
-			return;
-		}
+		if (this.gameOver) return;
 
 		if (this.drawHit(x, y, this.humanPlayer)) {
       this.saveLogInStorage();
@@ -178,7 +180,7 @@ class Morpion {
     return isFull ? 'tie' : null;
 }
 
-  checkWinner = (lastPlayer) => {
+  checkWinner = () => {
     const displayEndMessage = (message) => {
       const endMessageElement = document.getElementById('end-message');
       endMessageElement.textContent = message;
@@ -224,11 +226,9 @@ class Morpion {
     const isTestHitWinner = (x, y, player) => {
       this.gridMap[y][x] = player;
       const winner = this.getBoardWinner(this.gridMap);
-      console.log(winner);
       this.gridMap[y][x] = null;
       return winner === player ? true : false;
     }
-
 
     const findBest = (player) => {
       const bestCell = {'x': null, 'y': null};

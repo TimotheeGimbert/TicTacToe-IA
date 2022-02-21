@@ -31,10 +31,11 @@ body {
 .cell {
 	padding: 0;
 	margin: 0;
-	border: 1.5vh solid #181818;
+	border: 1.7vh solid #ffffff;
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
+  background-color: #181818;
 }
 
 .cell.filled-J1 {
@@ -45,47 +46,23 @@ body {
 	background-image: url('./assets/cross.png');
 }
 
-#A1, #A2, #A3 {
-	border-top: none;
-}
-
-#A1 {
-	border-left: none;
-}
-
-#A3 {
-	border-right: none;
-}
-
-#B1 {
-	border-left: none;
-}
-
-#B3 {
-	border-right: none;
-}
-
-#C1, #C2, #C3 {
-	border-bottom: none;
-}
-
-#C1 {
-	border-left: none;
-}
-
-#C3 {
-	border-right: none;
-}
-
 .actions {
 	flex: 0 0 auto;
 	margin: 20px 0;
 }
 
+.actions > * {
+  margin: 10px 22px;
+}
+
+.actions img {
+  width: 20px;
+}
+
 .replay-button {
 	padding: 10px 25px;
 	font-size: 2.5rem;
-	background-color: #C3C2C2;
+	background-color: #85C3D4;
 	color: #181818;
 	border-radius: 20px;
 	border: none;
@@ -95,7 +72,7 @@ body {
 .step-button {
 	padding: 10px 25px;
 	font-size: 1.5rem;
-	background-color: #f3bb53b6;
+	background-color: #D6B07C;
 	color: #181818;
 	border-radius: 20px;
 	border: none;
@@ -105,7 +82,7 @@ body {
 .other-button {
 	padding: 3px 5px;
 	font-size: 1.5rem;
-	background-color: #5386f3b6;
+	background-color: #C3EBA0;
 	color: #181818;
 	border-radius: 10px;
 	border: none;
