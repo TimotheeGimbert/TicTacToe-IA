@@ -25,7 +25,6 @@ body {
 	align-content: center;
 	grid-template-columns: repeat(3, 20vh);
   grid-template-rows: repeat(3, 20vh);
-	margin: 20px 0;
 }
 
 @media screen and (max-width: 650px) {
@@ -55,7 +54,7 @@ body {
 }
 
 .actions {
-	margin: 20px 0;
+	margin: 10px 0;
   display: flex;
   align-items: center;
 }
@@ -68,6 +67,14 @@ body {
   width: 20px;
 }
 
+.difficulty {
+  margin-bottom: 3vh;
+}
+#difficulty {
+  font-size: 1.2rem;
+  margin-bottom: 1vh;
+}
+
 .replay-button {
 	padding: 11px 33px;
 	font-size: 1.8rem;
@@ -76,6 +83,7 @@ body {
 	border-radius: 20px;
 	border: none;
 	cursor: pointer;
+  border: .5vh solid #3b3b3be3;
 }
 
 .step-button {
@@ -86,6 +94,7 @@ body {
 	border-radius: 20px;
 	border: none;
 	cursor: pointer;
+  border: .5vh solid #ffffffe3;
 }
 
 .other-button {
