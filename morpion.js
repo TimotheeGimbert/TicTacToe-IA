@@ -42,7 +42,9 @@ class Morpion {
 	}
 
   changeDifficulty = () => {
-    this.difficulty = this.difficulty === 'hard' ? 'easy' : 'hard';
+    this.difficulty = 
+      this.difficulty === 'hard' ? 'easy' : 
+        this.difficulty === 'easy' ? 'medium' : 'hard';
     document.getElementById('difficulty').innerHTML = this.difficulty;
     console.log(this.difficulty)
   }
@@ -123,6 +125,8 @@ class Morpion {
       switch(this.difficulty) {
         case 'hard':
           return this.minmaxStrat(this.gridMap, 0, -Infinity, Infinity, true);
+        case 'medium':
+          return this.mediumStrat(this.gridMap);
         case 'easy':
           return this.randomStrat(this.gridMap);
       }
@@ -204,6 +208,40 @@ class Morpion {
     const randomPosition = Math.floor(Math.random() * possibleHits.length);
     const randomHit = possibleHits[randomPosition];
     return randomHit;
+  }
+
+  mediumStrat = (board) => {
+    let possibleHits = [];
+    board.forEach( (line, y) => {
+      line.forEach( (cell, x) => {
+        if (cell === null) possibleHits.push({x: x, y: y})
+      });
+    });
+
+    const isTestHitWinner = (x, y, player) => {
+      this.gridMap[y][x] = player;
+      const winner = this.getBoardWinner(this.gridMap);
+      console.log(winner);
+      this.gridMap[y][x] = null;
+      return winner === player ? true : false;
+    }
+
+    const winningPositions = {'x': null, 'y': null};
+
+    possibleHits.forEach( (cell) => {
+      const x = cell['x'];
+      const y = cell['y'];
+      if (isTestHitWinner(x, y, this.iaPlayer)) {
+        winningPositions['x'] = x;
+        winningPositions['y'] = y;
+      }
+    });
+    if (winningPositions['x'] !== null) {
+      const x = winningPositions['x'];
+      const y = winningPositions['y'];
+      return {x, y}
+    }
+    else return this.randomStrat(this.gridMap);
   }
 
   minmaxStrat = (board, depth, alpha, beta, isMaximizing) => {
