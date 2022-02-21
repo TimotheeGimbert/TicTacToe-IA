@@ -92,6 +92,26 @@ body {
 	cursor: pointer;
 }
 
+.step-button {
+	padding: 10px 25px;
+	font-size: 1.5rem;
+	background-color: #f3bb53b6;
+	color: #181818;
+	border-radius: 20px;
+	border: none;
+	cursor: pointer;
+}
+
+.log-button {
+	padding: 3px 5px;
+	font-size: 1.5rem;
+	background-color: #5386f3b6;
+	color: #181818;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+}
+
 .end-message {
 	display: none;
 	position: fixed;
