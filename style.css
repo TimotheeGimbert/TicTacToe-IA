@@ -9,7 +9,7 @@ body {
 	padding: 0;
 	font-family: 'Lobster', cursive;
 	text-align: center;
-  background-color: #bdb5b5b9;
+  background-color: #d4cfcfb9;
 	color: #242424;
 }
 
@@ -37,7 +37,6 @@ body {
 .cell {
 	padding: 0;
 	margin: .5vh;
-	border: 1vh solid #ffffffe3;
   border-radius: 30px ;
 	background-position: center;
 	background-size: contain;
@@ -47,10 +46,12 @@ body {
 
 .cell.filled-J1 {
 	background-image: url('./assets/circle.png');
+  background-size: 75% 75%;
 }
 
 .cell.filled-J2 {
 	background-image: url('./assets/cross.png');
+  background-size: 75% 75%;
 }
 
 .actions {
