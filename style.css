@@ -9,6 +9,7 @@ body {
 	padding: 0;
 	font-family: 'Lobster', cursive;
 	text-align: center;
+  background-color: #bdb5b5b9;
 	color: #242424;
 }
 
@@ -36,8 +37,9 @@ body {
 
 .cell {
 	padding: 0;
-	margin: 0;
-	border: 1.7vh solid #ffffff;
+	margin: .5vh;
+	border: 1vh solid #ffffffe3;
+  border-radius: 30px ;
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
